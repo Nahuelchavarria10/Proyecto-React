@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+  import { useState } from 'react'
+  import MainLayout from './layouts/MainLayout'
+  import Home from './pages/Home'
+  import Accounts from './pages/Accounts'
+  import { BrowserRouter, Routes, Route } from 'react-router-dom'
+  import Cards from './pages/Cards'
+  import Transactions from './pages/Transactions'
+  import Loans from './pages/Loans'
+  import Error404 from './pages/Error404'
+  import ApplyCard from './components/ApplyCard'
+  import ApplyLoan from './components/ApplyLoan'
 
-function App() {
-  const [count, setCount] = useState(0)
+  function App() {
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    return (
+      <BrowserRouter>
+        {/* <Login /> */}
+        <MainLayout>
 
-export default App
+          <Routes>
+            <Route path='/Accounts' element={<Accounts/>} />
+            <Route path='/Cards' element={<Cards/>} />
+            <Route path='/ApplyCard' element= {<ApplyCard/>} />
+            <Route path='/Transactions' element={<Transactions/>} />
+            <Route path='/Loans' element={<Loans/>} />
+            <Route path='/ApplyLoan/:id' element= {<ApplyLoan/>} />
+            <Route path='*' element={<Error404/>} />
+          </Routes>
+
+        </MainLayout>
+      </BrowserRouter>
+    )
+  }
+
+  export default App
