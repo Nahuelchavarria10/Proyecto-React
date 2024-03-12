@@ -7,8 +7,8 @@
   import Transactions from './pages/Transactions'
   import Loans from './pages/Loans'
   import Error404 from './pages/Error404'
-  import ApplyCard from './components/ApplyCard'
-  import ApplyLoan from './components/ApplyLoan'
+  import ApplyCards from './pages/ApplyCards'
+  import ApplyLoans from './pages/ApplyLoans'
 
   function App() {
 
@@ -20,10 +20,10 @@
           <Routes>
             <Route path='/Accounts' element={<Accounts/>} />
             <Route path='/Cards' element={<Cards/>} />
-            <Route path='/ApplyCard' element= {<ApplyCard/>} />
+            <Route path='/ApplyCards/' element= {<ApplyCards/>} />
             <Route path='/Transactions' element={<Transactions/>} />
             <Route path='/Loans' element={<Loans/>} />
-            <Route path='/ApplyLoan/:id' element= {<ApplyLoan/>} />
+            <Route path='/ApplyLoans/:id' element= {<ApplyLoans/>} />
             <Route path='*' element={<Error404/>} />
           </Routes>
 

@@ -8,11 +8,13 @@ export function useAxios(url) {
     /* const [envio, setEnvio] = useState() */
 
     useEffect(() => {
+        console.log("pepe1");
         setLoading(true);
         axios(url)
             .then(response => setData(response.data))
             .catch(error => setError(error))
             .finally(()=> setLoading(false));
+            console.log("pepe2");
     }, [])
     console.log(data, loading, error);
 

@@ -4,10 +4,10 @@ import Header from '../components/Header'
 const MainLayout = (props) => {
     return (
         <div className='main-layout flex'>
-            <SideBar/>
+            <SideBar />
             <div className='w-full'>
-            <Header/>
-            {props.children}
+                <Header />
+                {props.children}
             </div>
         </div>
     )

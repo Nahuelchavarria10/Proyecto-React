@@ -10,7 +10,7 @@ const Accounts = () => {
     return (
         <main className='flex justify-center flex-wrap gap-10 px-10'>
             {
-                data.accounts?.map(account => <Account key={account.id} account={account} value={1} />)
+                data.accounts?.map(account => <Account key={account.id} account={account} />)
             }
             {error && <h1 className='text-4xl absolute'>Error: {error}</h1>}
             {loading && <li>Loading</li>}
