@@ -1,19 +1,39 @@
+import { useEffect } from 'react';
 import Account from '../components/Account'
-import { useAxios } from '../useAxios'
-import { useAxiosPost } from '../useAxiosPost';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import authActions from '../redux/actions/auth.actions'
+import { Link } from 'react-router-dom';
 
 const Accounts = () => {
-    const { data, loading, error } = useAxios(`http://localhost:8080/api/clients/1`)
-
-    /* const { error2 } = useAxiosPost(`http://localhost:8080/api/clients/${id}`) */
-
+    const user = useSelector((store) => store.authReducer.user);
+    const token = localStorage.getItem('token');
+    const dispatch = useDispatch();
+    const { current } = authActions;
+    //get clients/current
+    useEffect(() => {
+        if (!user.loggedIn && !!token) {
+            axios.get(`/api/clients/current`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    dispatch(current(res.data))
+                })
+        }
+    }, [])
+    
     return (
-        <main className='flex justify-center flex-wrap gap-10 px-10'>
+        <main className='flex min flex-col items-center gap-5 px-10'>
+            <h1 className='text-3xl font-thin'>Accounts</h1>
             {
-                data.accounts?.map(account => <Account key={account.id} account={account} />)
+                user.accounts?.map(account => <Account key={account.id} account={account} />)
             }
-            {error && <h1 className='text-4xl absolute'>Error: {error}</h1>}
-            {loading && <li>Loading</li>}
+            <article className='bg-apply self-center w-full text-center text-black p-5 mb-5 rounded-md border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
+                <Link to={`/ApplyAccounts/`} className='text-xl'>Apply Account</Link>
+            </article>
         </main>
     )
 }

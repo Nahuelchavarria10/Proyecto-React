@@ -1,36 +1,84 @@
-    import React, { useEffect, useState } from 'react'
-    import Apply from '../components/Apply'
-    import Loan from '../../public/loanImg.jpeg'
-    import axios from 'axios'
-    import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import Apply from '../components/Apply'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import authActions from '../redux/actions/auth.actions'
+import { useNavigate } from 'react-router-dom'
 
-    const ApplyLoans = () => {
 
-        const [loan, setLoan] = useState([]);
-        const [client, setClient] = useState([]);
-        const { id } = useParams();
-        
-        useEffect(() => {
-            axios(`http://localhost:8080/api/loans/`)
-                .then(response => {
-                    setLoan(response.data);
+const ApplyLoans = () => {
+    const [loan, setLoan] = useState([]);
+    const [addLoan, setAddLoan] = useState({ id: '', AccountDestination: '', amount: '', payments: '' });
+    const [errorMessage, setErrorMessage] = useState('');
+    const user = useSelector((store) => store.authReducer.user);
+    const token = localStorage.getItem('token');
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { current } = authActions;
+
+    //GET loans/
+    useEffect(() => {
+        if (!user.loggedIn && !!token) {
+            axios.get("/api/loans/", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }})
+                .then(res => {
+                    console.log(res.data);
+                    setLoan(res.data);
                 })
-                .catch(error => console.log(error));
-        }, []);
+        }
+    }, [])
 
-        useEffect(() => {
-            axios(`http://localhost:8080/api/clients/${id}`)
-                .then(response => {
-                    setClient(response.data);
+    //GET Clients/$id
+    useEffect(() => {
+        if (!user.loggedIn && !!token) {
+            axios.get(`/api/clients/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    dispatch(current(res.data))
                 })
-                .catch(error => console.log(error));
-        }, []);
+        }
+    }, [])
 
-        return (
-            <main>
-                <Apply loans={loan} clients={client} />
-            </main>
-        )
+    //POST loans/
+    const handleLoans = async (e) => {
+        e.preventDefault();
+        axios.post('/api/loans/', addLoan, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+            .then(res => {
+                console.log(res.data)
+                navigate('/Loans')
+            })
+            .catch(error=>{
+                console.log(error.response);
+                if (error.response.status === 403) {
+                    setErrorMessage(error.response.data)
+                }else{
+                    setErrorMessage(error.response.data)
+                }
+            })
     }
 
-    export default ApplyLoans
+    const handLeInput = (e) => {
+        setAddLoan({ ...addLoan, [e.target.name]: e.target.value })
+    }
+    console.log(addLoan);
+
+    return (
+        <main className='w-[80%]'>
+            <Apply loans={loan} clients={user} handLeInput={handLeInput} handLeLoans={handleLoans} errorMessage={errorMessage} />
+        </main>
+    )
+}
+
+export default ApplyLoans

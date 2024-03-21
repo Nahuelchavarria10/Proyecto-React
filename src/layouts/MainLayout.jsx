@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
-const MainLayout = (props) => {
+import { Outlet } from 'react-router-dom'
+const MainLayout = () => {
+
     return (
-        <div className='main-layout flex'>
-            <SideBar />
-            <div className='w-full'>
+
+        <div className='flex m-auto w-full justify-end bg-apply'>
+            <div className='min-w-[15%] md:min-w-[10%] lg:min-w-[8%] 2xl:min-w-[4.5%]'>
+                <SideBar />
+            </div>
+            <div className='flex items-center gap-3 w-full flex-col min-h-screen'>
                 <Header />
-                {props.children}
+                <Outlet />
             </div>
         </div>
+
     )
 }
 

@@ -1,58 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import Lupa from '../../public/lupa.png'
-import { data } from 'autoprefixer';
 import axios from 'axios';
-
 import User from '../../public/user.png'
-import Notification from '../../public/notification.png'
-import Message from '../../public/message.png'
-import Night from '../../public/night.png'
+import Logo from "../../public/logo.png"
+import { useDispatch, useSelector } from 'react-redux';
+import authActions from '../redux/actions/auth.actions'
 
 
-const Header = ({ name }) => {
-    const [client, setClient] = useState([]);
+const Header = () => {
+    const user = useSelector((store) => store.authReducer.user);
+    const token = localStorage.getItem('token');
+    const dispatch = useDispatch();
+    const { current } = authActions;
+
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        axios(`http://localhost:8080/api/clients/1`)
-            .then(response => {
-                setClient(response.data);
+        if (!user.loggedIn && !!token) {
+            axios.get("/api/clients/current", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
-            .catch(error => console.log(error));
-    }, []);
-    console.log(client);
+                .then(res => {
+                    console.log(res.data);
+                    dispatch(current(res.data))
+                })
+        }
+    }, [])
+
+    console.log(user);
 
     return (
         <>
-            <header className=' flex justify-around items-center w-full py-8'>
+            <header className=' flex items-center justify-between px-5 w-full h-[58px] shadow-header bg-white gap-3'>
 
-                <div>
-                    <h3 className='text-2xl'>
-                        Welcome Back, {client.firstName} {client.lastName}
+                <div className=''>
+                    <h3 className='text-lg -ml-3'>
+                        Welcome Back
+                    </h3>
+                    <h3 className='text-[#0bbaef] font-medium'>
+                        {user.firstName} {user.lastName}
                     </h3>
                 </div>
-                <div className='flex justify-center items-center gap-3 w-1/2'>
-                    <img className='w-8 h-8' src={Lupa} alt="lupa" />
-                    <label htmlFor="search">
-                        <input type="text" name="buscador" id="search" placeholder='Search...'
-                            className=' rounded-lg w-80 p-2 text-xl outline-none bg-transparent' />
-                    </label>
-                </div>
-                <div className='flex justify-center relative items-center gap-10'>
-                    <div className='w-[29px]'>
-                        <img src={Night} alt="" />
-                    </div>
-                    <div className='w-[31px]'>
-                        <img src={Message} alt="" />
-                    </div>
-                    <div className='w-[39px]'>
-                        <img src={Notification} alt="" />
-                    </div>
-                    <div className='w-[50px] border border-solid rounded-full'>
-                        <img src={User} alt="" />
-                        {/* <div className='bg-SideBard rounded-xl absolute right-1 top-16 z-10 w-40 h-52 '>
-
-                        </div> */}
-                    </div>
+                <div className='w-[30px] relative top-[2px] text-center text-xs border-solid rounded-full'>
+                    <img src={Logo} alt="logo" /> <span className='relative font-semibold right-[2px] top-[-3px]'>Sigma</span>
                 </div>
             </header>
         </>

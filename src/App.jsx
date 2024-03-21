@@ -1,35 +1,73 @@
-  import { useState } from 'react'
-  import MainLayout from './layouts/MainLayout'
-  import Home from './pages/Home'
-  import Accounts from './pages/Accounts'
-  import { BrowserRouter, Routes, Route } from 'react-router-dom'
-  import Cards from './pages/Cards'
-  import Transactions from './pages/Transactions'
-  import Loans from './pages/Loans'
-  import Error404 from './pages/Error404'
-  import ApplyCards from './pages/ApplyCards'
-  import ApplyLoans from './pages/ApplyLoans'
+import { useState } from 'react'
+import MainLayout from './layouts/MainLayout'
+import Accounts from './pages/Accounts'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import Cards from './pages/Cards'
+import Transactions from './pages/Transactions'
+import Loans from './pages/Loans'
+import ApplyCards from './pages/ApplyCards'
+import ApplyLoans from './pages/ApplyLoans'
+import Login from './pages/Login'
+import Movements from './pages/Movements'
+import SingUp from './pages/SingUp'
+import ApplyAccounts from './pages/ApplyAccounts'
+import { withAuth } from './hocs/withAuth'
 
-  function App() {
+function App() {
 
-    return (
-      <BrowserRouter>
-        {/* <Login /> */}
-        <MainLayout>
+  const MainLayoutWithAuth = withAuth(MainLayout)
 
-          <Routes>
-            <Route path='/Accounts' element={<Accounts/>} />
-            <Route path='/Cards' element={<Cards/>} />
-            <Route path='/ApplyCards/' element= {<ApplyCards/>} />
-            <Route path='/Transactions' element={<Transactions/>} />
-            <Route path='/Loans' element={<Loans/>} />
-            <Route path='/ApplyLoans/:id' element= {<ApplyLoans/>} />
-            <Route path='*' element={<Error404/>} />
-          </Routes>
+  const rutesLogged = [
+    {
+      path: '/Accounts',  element: Accounts
+    },
+    {
+      path: '/Movements/:id',  element: Movements
+    },
+    {
+      path: '/Cards',  element: Cards
+    },
+    {
+      path: '/Transactions',  element: Transactions 
+    },
+    {
+      path: '/Loans',  element: Loans
+    },
+    {
+      path: '/ApplyCards',  element: ApplyCards
+    },
+    { 
+      path: '/ApplyLoans/:id',  element: ApplyLoans
+    },
+    {
+      path: '/ApplyAccounts',  element: ApplyAccounts
+    },
+  ]
 
-        </MainLayout>
-      </BrowserRouter>
-    )
-  }
 
-  export default App
+  return (
+
+
+    <Routes>
+
+      <Route path='/Login' element={<Login />} />
+      <Route path='/SingUp' element={<SingUp />} />
+      <Route path='*' element={<Navigate to={'/Login'} />}></Route>
+
+      
+      <Route element={<MainLayoutWithAuth />}>
+
+      {
+        rutesLogged.map((ruta) => {
+          const Page = withAuth(ruta.element)
+          return <Route key={ruta.path} path={ruta.path} element={<Page/>}/>
+        })
+      }
+
+      </Route>
+
+    </Routes>
+  )
+}
+
+export default App
