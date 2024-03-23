@@ -1,15 +1,16 @@
 import { createReducer } from "@reduxjs/toolkit";
 import authActions from '../actions/auth.actions'
-const { logout, login, current } = authActions
+const { logout, login, current,updateAccountMovements } = authActions
 
 const initialState = {
     user: {
         name: "",
         email: "",
-        loggedIn: null
     },
     token: null,
-    timestamps: null
+    timestamps: null,
+    loggedIn: false,
+    accountMovements: [],
 }
 
 const authReducer = createReducer(initialState, (builder) => {
@@ -19,22 +20,24 @@ const authReducer = createReducer(initialState, (builder) => {
                 ...state,
                 token: action.payload.token,
                 timestamps: action.payload.timestamps,
+                loggedIn: true
             }
         })
         .addCase(current, (state, action) => {
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                loggedIn: true
             }
         })
-        .addCase(logout, (state, action) => {
+        .addCase(updateAccountMovements, (state, action) => {
             return {
                 ...state,
-                timestamps: null,
-                token: null,
-                loggedIn: false
-                
-            }
+                accountMovements: action.payload,
+            };
+        })
+        .addCase(logout, (state, action) => {
+            return initialState
         })
 })
 

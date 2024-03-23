@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
-import User from '../../public/user.png'
 import Logo from "../../public/logo.png"
 import { useDispatch, useSelector } from 'react-redux';
 import authActions from '../redux/actions/auth.actions'
@@ -11,8 +10,6 @@ const Header = () => {
     const token = localStorage.getItem('token');
     const dispatch = useDispatch();
     const { current } = authActions;
-
-    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if (!user.loggedIn && !!token) {
@@ -32,7 +29,7 @@ const Header = () => {
 
     return (
         <>
-            <header className=' flex items-center justify-between px-5 w-full h-[58px] shadow-header bg-white gap-3'>
+            <header className=' flex items-center justify-around w-full h-[58px] shadow-header bg-white gap-3'>
 
                 <div className=''>
                     <h3 className='text-lg -ml-3'>

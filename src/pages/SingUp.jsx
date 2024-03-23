@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from "../../public/logo.png"
 import authActions from '../redux/actions/auth.actions'
 import axios from 'axios';
 
@@ -43,38 +44,41 @@ const SingUp = () => {
     console.log(userRegister);
 
     return (
-        <section className='flex flex-col  items-center h-screen m-auto bg-[#2625e3]'>
+        <main className='bg-login flex flex-col min-h-screen min-w-full '>
 
-            <div className='bg-[#000000] py-10 text-center w-full h-1/3'>
-                <h1 className='text-white font-bold text-4xl'>
-                    Sing Up
-                </h1>
-                <h2 className='text-white font-medium text-xl'>
-                    Gestiona tus finanzas de forma segura y conveniente. ¡Es la manera más fácil de llevar el control de tu dinero!"
+            <div className='pt-5 text-center w-full'>
+                <div>
+                    <h1 className='flex justify-center items-center gap-3 py-2 text-white font-medium text-4xl'>
+                        Sigma Elite Bank
+                        <img src={Logo} className='w-10' alt="logo" />
+                    </h1>
+                </div>
+                <h2 className='text-white font-normal w-3/4 m-auto text-base'>
+                    Register now and start enjoying the benefits!
                 </h2>
             </div>
-            <div className='bg-white w-full h-full '>
-                <h1 className='text-center '>Sign Up</h1>
-                <form onSubmit={handLeSingUp} className='flex flex-col py-5 justify-center items-center gap-5'>
-                    <label htmlFor="email">First Name <br />
-                        <input onInput={handLeInput} name="firstName" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="text" id="firstName" placeholder='First Name ' />
+            <div className=''>
+
+                <form onSubmit={handLeSingUp} className='flex flex-col justify-center gap-3 w-2/3 sm:w-1/2 m-auto py-5'>
+                    <label className='text-white font-normal text-lg' htmlFor="email">First Name
+                        <input onInput={handLeInput} name="firstName" className='w-full py-2 rounded-md border-2 text-black border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="text" id="firstName" placeholder='First Name ' />
                     </label>
-                    <label htmlFor="password">Last Name <br />
-                        <input onInput={handLeInput} name="lastName" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="text" id="lastName" placeholder='Last Name' />
+                    <label className='text-white font-normal text-lg' htmlFor="password">Last Name
+                        <input onInput={handLeInput} name="lastName" className='w-full py-2 rounded-md border-2 text-black border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="text" id="lastName" placeholder='Last Name' />
                     </label>
-                    <label htmlFor="email">Email <br />
-                        <input onInput={handLeInput} name="email" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="email" id="email" placeholder='hello@example.com' />
+                    <label className='text-white font-normal text-lg' htmlFor="email">Email
+                        <input onInput={handLeInput} name="email" className='w-full py-2 rounded-md border-2 text-black border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="email" id="email" placeholder='hello@example.com' />
                     </label>
-                    <label htmlFor="password">Password <br />
-                        <input onInput={handLeInput} name="password" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="password" id="password" placeholder='Password' />
+                    <label className='text-white font-normal text-lg' htmlFor="password">Password
+                        <input onInput={handLeInput} name="password" className='w-full py-2 rounded-md border-2 text-black border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="password" id="password" placeholder='Password' />
                     </label>
-                    <p className='text-red-500'>{errorMessage}</p>
-                    <input type="submit" value="Sing Up" className='bg-[#009E23] px-[89px] py-2 rounded-md text-white' />
-                    <p className=''>Already have an account? <Link to={`/Login`} className='text-blue-500'>Sing In</Link> </p>
+                    <p className='text-red-500 font-normal'>{errorMessage}</p>
+                    <input type="submit" value="Sing Up" className='bg-[#009E23] w-full py-2 rounded-md text-white font-semibold' />
+                    <p className='text-white'>Already have an account? <Link to={`/Login`} className='text-[#42e064] text-base font-semibold border-b border-green-500'>Sing In</Link> </p>
                 </form>
             </div>
 
-        </section>
+        </main>
     )
 }
 

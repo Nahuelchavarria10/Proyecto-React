@@ -4,7 +4,7 @@ const current = createAction('CURRENT', (data)=>{
     return {
         payload:{
             ...data,
-            loggeIn: true,
+            
         }
     }
 })
@@ -22,15 +22,21 @@ const logout = createAction('LOGOUT', ()=>{
     localStorage.removeItem('token')
     return {
         payload:{
-            loggeIn: false
+            
         }
     }
 })
+const updateAccountMovements = createAction('UPDATE_ACCOUNT_MOVEMENTS', (movements) => {
+    return {
+        payload: movements
+    };
+});
 
 const actions = {
     current,
     login,
-    logout
+    logout,
+    updateAccountMovements
 }
 
 export default actions

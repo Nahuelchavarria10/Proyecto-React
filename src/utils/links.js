@@ -3,6 +3,7 @@ import Cards from "../../public/cards.png";
 import Transactions from "../../public/transactions.png";
 import Loans from "../../public/loans.png";
 
+
 export const LINKS_HEADER = [ {
     
     href: "/Accounts",
@@ -17,11 +18,11 @@ export const LINKS_HEADER = [ {
 {
     href: "/Transactions",
     name: "Transactions",
-    image:Transactions,
+    image: Transactions,
 },
 {
     href: "/Loans",
     name: "Loans",
     image: Loans,
-},
+},  
 ]

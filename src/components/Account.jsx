@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-
-import authActions from '../redux/actions/auth.actions'
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Account = ({ account }) => {
 
 
     return (
         <>
-            <article className='bg-Account flex flex-col gap-1 w-64 text-white p-5 rounded-t-md rounded-b-2xl border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
+            <article className='bg-Account flex flex-col gap-1 min-w-64 text-white p-5 rounded-t-md rounded-b-2xl border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
 
                 <h3 className='text-xl font-thin text-center'> {account.number} </h3>
 

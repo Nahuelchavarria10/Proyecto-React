@@ -30,10 +30,12 @@ const Cards = () => {
     return (
         <main className='flex flex-col items-center gap-5 px-10'>
             <h1 className='text-3xl font-thin'>Cards</h1>
-            {
-                user.cards?.map(card => <Card key={card.id} card={card}/>)
-            }
-            <article className='bg-apply self-center w-full text-center text-black p-5 mb-5 rounded-md border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
+            <div className='flex flex-wrap justify-around gap-y-5  lg:gap-10 items-center'>
+                {
+                    user.cards?.map(card => <Card key={card.id} card={card} />)
+                }
+            </div>
+            <article className='bg-apply self-center w-64 text-center text-black p-5 mb-5 rounded-md border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
                 <Link to={`/ApplyCards/`} className='text-xl'>Apply Card</Link>
             </article>
         </main>

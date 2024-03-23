@@ -6,11 +6,11 @@ const MainLayout = () => {
 
     return (
 
-        <div className='flex m-auto w-full justify-end bg-apply'>
-            <div className='min-w-[15%] md:min-w-[10%] lg:min-w-[8%] 2xl:min-w-[4.5%]'>
+        <div className='flex min-w-full min-h-screen bg-apply'>
+            <div className='min-w-[60px]'>
                 <SideBar />
             </div>
-            <div className='flex items-center gap-3 w-full flex-col min-h-screen'>
+            <div className='flex items-center flex-col min-h-screen'>
                 <Header />
                 <Outlet />
             </div>

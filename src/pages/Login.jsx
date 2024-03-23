@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import Logo from "../../public/logo.png"
-import Messibanner from "../../public/messi-banner.png"
 import { useDispatch } from 'react-redux'
 import authActions from '../redux/actions/auth.actions'
 import { Link, useNavigate } from 'react-router-dom'
@@ -38,35 +37,33 @@ export const Login = () => {
 
     console.log(userData);
     return (
-        <main className='h-full max-w-[1440px] m-auto bg-[#75dfff]'>
+        <main className='bg-login flex flex-col min-h-screen min-w-screen'>
 
-            <div className='bg-[#] py-10 text-center w-full h-1/2'> 
-                <h1 className='text-white font-bold text-4xl'>
-                    Sigma Elite Bank <img src={Logo} className='m-auto py-3' alt="logo" />
+            <div className='pt-10 text-center w-full'>
+                <h1 className='text-white font-medium text-4xl'>
+                    Sigma Elite Bank <img src={Logo} className='m-auto pt-3' alt="logo" />
                 </h1>
-                <h2 className='text-white font-medium text-xl'>
-                    Logging in is the first step
-                </h2>
             </div>
-            <div className='bg-apply flex h-full'>
+            <div className='min-w-1/'>
 
-                <div className='bg-[url("../../public/messi-banner.png")] bg-[center] w-1/2 bg-cover bg-no-repeat'>
-                    {/* <img src={Messibanner} className='w-full' alt="messi-banner" /> */}
-                </div>
-                <form onSubmit={handLeSingIn} className='flex flex-col py-5 justify-center items-center gap-5 w-1/2'>
-                    <label htmlFor="email">Email <br />
-                        <input onInput={handLeInput} name="email" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="email" id="email" placeholder='hello@example.com' />
+                <form onSubmit={handLeSingIn} className='flex flex-col justify-center gap-3 w-2/3 sm:w-1/2 m-auto py-5'>
+                    <h2 className='text-white py-2 font-normal text-base text-center'>
+                        Manage your finances from anywhere and at any time
+                    </h2>
+                    <label className='text-white font-normal text-lg' htmlFor="email">
+                        <h1>Email</h1>
+                        <input onInput={handLeInput} name="email" className='w-full py-2  rounded-md border-2 text-black border-blue-600 hover:border-blue-950 focus:border-blue-950 placeholder-gray-500' type="email" id="email" placeholder='hello@example.com' />
                     </label>
-                    <label htmlFor="password">Password <br />
-                        <input onInput={handLeInput} name="password" className='px-5 py-2 rounded-md border-2  border-blue-600 ease-out duration-300 hover:border-blue-950 hover:ease-in' type="password" id="password" placeholder='Password' />
+                    <label className='text-white font-normal text-lg' htmlFor="password">
+                        <span>Password</span>
+                        <input onInput={handLeInput} name="password" className='w-full py-2 rounded-md border-2 text-black border-blue-600 hover:border-blue-950 focus:border-blue-950 placeholder-gray-500' type="password" id="password" placeholder='Password' />
                     </label>
-                    <p className='text-red-500'>{errorMessage}</p>
-                    <input type="submit" value="Sing In" className='bg-[#009E23] px-[89px] py-2 rounded-md text-white' />
-                    <p className=''>Don't have an account? <Link to={`/SingUp`} className='text-blue-500'>Sing Up</Link> </p>
+                    <p className='text-red-500 font-medium'>{errorMessage}</p>
+                    <input type="submit" value="Sing In" className='bg-[#009E23] w-full py-2 rounded-md font-semibold text-white' />
+                    <p className='text-white text-base'>Don't have an account? <Link to={`/SingUp`} className='text-[#42e064] text-base font-semibold border-b border-green-500'>Sing Up</Link> </p>
                 </form>
+
             </div>
-
-
         </main>
     )
 }

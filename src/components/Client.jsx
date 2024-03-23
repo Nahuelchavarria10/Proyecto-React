@@ -1,7 +1,6 @@
 import React from 'react'
 import User from '../../public/user.png'
-import Account from './Account'
-const Client = ({name, lastName, email, accounts}) => {
+const Client = ({name, lastName, email}) => {
     return (
         <div className='mt-10'>
             <article className=' flex flex-col gap-5 w-[477px] h-[277px] p-5 my-10 bg-gray-100 rounded-md border  border-neutral-400'>
