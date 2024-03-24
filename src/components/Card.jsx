@@ -31,7 +31,7 @@ function Card({ card }) {
 
   return (
     <>
-      <article className={`${getCardColor()} flex flex-col justify-between  w-60 min-h-36 text-white p-5 rounded-2xl border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]`}>
+      <article className={`${getCardColor()} flex flex-col justify-between w-60 min-h-36 text-white p-5 rounded-2xl border-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]`}>
 
         <div className="flex justify-between items-center">
           <img src={Chip} alt="" className='w-6 h-5' />

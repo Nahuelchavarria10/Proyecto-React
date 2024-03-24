@@ -42,20 +42,20 @@ const Movements = (account) => {
             <table className='font-medium border-1 w-full'>
                 <thead>
                     <tr className=' '>
-                        <th className='border-b p-1 border-gray-600'>Type</th>
-                        <th className='border-b p-1 border-gray-600 text-end'>Amount</th>
-                        <th className='border-b p-1 border-gray-600'>Data</th>
-                        <th className='border-b p-1 border-gray-600'>Description</th>
+                        <th className='border-b border-gray-600'>Type</th>
+                        <th className='border-b border-gray-600 text-end'>Amount</th>
+                        <th className='border-b border-gray-600'>Data</th>
+                        <th className='border-b border-gray-600'>Description</th>
                     </tr>
                 </thead>
                 <tbody >
                     {
                         accountMovements.transactions?.map(transaction => {
                             return (<tr key={transaction.id} className='' >
-                                <td className={`${getTextColor(transaction.type)} border-b py-5 border-gray-600 p-1`}>{transaction.type}</td>
-                                <td className={`${getTextColor(transaction.type)} border-b border-gray-600 p-1 text-end`}>{transaction.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2})}</td>
-                                <td className={`${getTextColor(transaction.type)} border-b border-gray-600 p-1 text-center`}>{new Date(transaction.date).toLocaleDateString()} {new Date(transaction.date).toLocaleTimeString('en-US', { hour: '2-digit', hour12: false, minute: '2-digit' })}</td>
-                                <td className={`${getTextColor(transaction.type)} border-b  border-gray-600 p-1 text-center`}>{transaction.description}</td>
+                                <td className={`${getTextColor(transaction.type)} border-b py-5 border-gray-600`}>{transaction.type}</td>
+                                <td className={`${getTextColor(transaction.type)} border-b border-gray-600 text-end`}>{transaction.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2})}</td>
+                                <td className={`${getTextColor(transaction.type)} border-b border-gray-600 text-center`}>{new Date(transaction.date).toLocaleDateString()} {new Date(transaction.date).toLocaleTimeString('en-US', { hour: '2-digit', hour12: false, minute: '2-digit' })}</td>
+                                <td className={`${getTextColor(transaction.type)} border-b  border-gray-600 text-center`}>{transaction.description}</td>
                             </tr>)
                         })
                     }

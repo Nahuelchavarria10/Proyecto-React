@@ -29,7 +29,7 @@
         return (
             <main className='flex flex-col items-center gap-5'>
                 <h1 className='text-3xl font-thin'>Accounts</h1>
-                <div className='flex flex-wrap justify-around gap-y-5 lg:gap-10 items-center'>
+                <div className='flex flex-wrap px-5 justify-around gap-y-5 lg:gap-10 items-center'>
                     {
                         user.accounts?.map(account => <Account key={account.id} account={account} />)
                     }

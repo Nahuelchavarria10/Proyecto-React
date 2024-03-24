@@ -28,9 +28,9 @@ const Cards = () => {
     }, [])
 
     return (
-        <main className='flex flex-col items-center gap-5 px-10'>
+        <main className='flex flex-col items-center gap-5'>
             <h1 className='text-3xl font-thin'>Cards</h1>
-            <div className='flex flex-wrap justify-around gap-y-5  lg:gap-10 items-center'>
+            <div className='flex flex-wrap justify-around px-5 gap-y-5 lg:gap-10 items-center'>
                 {
                     user.cards?.map(card => <Card key={card.id} card={card} />)
                 }

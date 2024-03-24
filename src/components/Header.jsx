@@ -29,10 +29,10 @@ const Header = () => {
 
     return (
         <>
-            <header className=' flex items-center justify-around w-full h-[58px] shadow-header bg-white gap-3'>
+            <header className='flex items-center justify-around w-full h-[58px] shadow-header bg-white gap-3'>
 
-                <div className=''>
-                    <h3 className='text-lg -ml-3'>
+                <div className='text-center'>
+                    <h3 className='text-lg'>
                         Welcome Back
                     </h3>
                     <h3 className='text-[#0bbaef] font-medium'>
